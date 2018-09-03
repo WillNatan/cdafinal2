@@ -19,7 +19,6 @@ class SlidesRepository extends ServiceEntityRepository
         parent::__construct($registry, Slides::class);
     }
 
-
 //    /**
 //     * @return Slides[] Returns an array of Slides objects
 //     */
