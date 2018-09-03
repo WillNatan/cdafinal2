@@ -17,3 +17,9 @@
 
     <button type="submit">login</button>
 </form>
+
+<h1>Create new User</h1>
+
+{{ include('user/_form.html.twig') }}
+
+<a href="{{ path('user_index') }}">back to list</a>
