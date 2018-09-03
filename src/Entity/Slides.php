@@ -35,7 +35,6 @@ class Slides
     {
         return $this->NomSlide;
     }
-
     public function setNomSlide(string $NomSlide): self
     {
         $this->NomSlide = $NomSlide;
