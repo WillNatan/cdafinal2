@@ -27,8 +27,6 @@ class MsgDuJour
         return $this->id;
     }
 
-
-
     public function getMessage(): ?string
     {
         return $this->Message;

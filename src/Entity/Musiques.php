@@ -26,7 +26,6 @@ class Musiques
         return $this->id;
     }
 
-
     public function getUrlMusiques(): ?string
     {
         return $this->UrlMusiques;

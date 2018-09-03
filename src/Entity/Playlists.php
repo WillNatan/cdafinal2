@@ -26,8 +26,6 @@ class Playlists
         return $this->id;
     }
 
-    
-
     public function getPlaylistsName(): ?string
     {
         return $this->PlaylistsName;

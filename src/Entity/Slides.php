@@ -54,4 +54,5 @@ class Slides
 
         return $this;
     }
+
 }

@@ -19,6 +19,7 @@ class MsgDuJourRepository extends ServiceEntityRepository
         parent::__construct($registry, MsgDuJour::class);
     }
 
+
 //    /**
 //     * @return MsgDuJour[] Returns an array of MsgDuJour objects
 //     */
