@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
@@ -15,27 +16,59 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods="GET")
+     * @Route("/", name="user_index", methods="GET|POST")
+     * @param $request
+     * @param $passwordEncoder
+     * @return Response
      */
-    public function index(): Response
+    public function index( Request $request,UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('user/index.html.twig', ['users' => $users]);
+
+        $user = new User();
+        $form = $this->createForm(User1Type::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render('user/index.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+
     }
 
     /**
      * @Route("/new", name="user_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
