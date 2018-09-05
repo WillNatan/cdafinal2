@@ -53,6 +53,61 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $birthday;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numeroFix;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numeroPortable;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresseComplement;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numeroAppartement;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
     
     public function __construct()
     {
@@ -125,5 +180,137 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(\DateTimeInterface $birthday): self
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getNumeroFix(): ?string
+    {
+        return $this->numeroFix;
+    }
+
+    public function setNumeroFix(string $numeroFix): self
+    {
+        $this->numeroFix = $numeroFix;
+
+        return $this;
+    }
+
+    public function getNumeroPortable(): ?string
+    {
+        return $this->numeroPortable;
+    }
+
+    public function setNumeroPortable(string $numeroPortable): self
+    {
+        $this->numeroPortable = $numeroPortable;
+
+        return $this;
+    }
+
+    public function getAdresse1(): ?string
+    {
+        return $this->adresse1;
+    }
+
+    public function setAdresse1(string $adresse1): self
+    {
+        $this->adresse1 = $adresse1;
+
+        return $this;
+    }
+
+    public function getAdresse2(): ?string
+    {
+        return $this->adresse2;
+    }
+
+    public function setAdresse2(string $adresse2): self
+    {
+        $this->adresse2 = $adresse2;
+
+        return $this;
+    }
+
+    public function getAdresseComplement(): ?string
+    {
+        return $this->adresseComplement;
+    }
+
+    public function setAdresseComplement(string $adresseComplement): self
+    {
+        $this->adresseComplement = $adresseComplement;
+
+        return $this;
+    }
+
+    public function getNumeroAppartement(): ?string
+    {
+        return $this->numeroAppartement;
+    }
+
+    public function setNumeroAppartement(string $numeroAppartement): self
+    {
+        $this->numeroAppartement = $numeroAppartement;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
     }
 }
