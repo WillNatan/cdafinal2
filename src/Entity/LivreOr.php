@@ -56,7 +56,6 @@ class LivreOr
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
         return $this;
     }
 

@@ -27,6 +27,50 @@
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
             </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ user.birthday ? user.birthday|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NumeroFix</th>
+                <td>{{ user.numeroFix }}</td>
+            </tr>
+            <tr>
+                <th>NumeroPortable</th>
+                <td>{{ user.numeroPortable }}</td>
+            </tr>
+            <tr>
+                <th>Adresse1</th>
+                <td>{{ user.adresse1 }}</td>
+            </tr>
+            <tr>
+                <th>Adresse2</th>
+                <td>{{ user.adresse2 }}</td>
+            </tr>
+            <tr>
+                <th>AdresseComplement</th>
+                <td>{{ user.adresseComplement }}</td>
+            </tr>
+            <tr>
+                <th>NumeroAppartement</th>
+                <td>{{ user.numeroAppartement }}</td>
+            </tr>
+            <tr>
+                <th>CodePostal</th>
+                <td>{{ user.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ user.ville }}</td>
+            </tr>
         </tbody>
     </table>
 
