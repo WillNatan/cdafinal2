@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <!-- CONTENT section -->  
+  <div id="content" class="container">
+      
+    <!-- Contact -->
+    <section id="contact" class="row padding">
+      <h2 class="titre_rubrique text-xs-center">CONTACT</h2>
+      
+      <div class="col-md-6 col-sm-12 col-xs-12" id="coordonnees_contact-section">
+        <p class="text-uppercase font-weight-bold text-xs-center">COUNTRY DANCE ACADEMY</p>
+        <div id="box_coordonnes">
+          <p class="font-italic font-weight-bold">Adresse postale:</p>
+          <p class="font-italic">83 rue Amiral Lacaze<br/>97480 Saint-Joseph<br/>Ile de la Réunion - France</p>
+          <p class="font-italic font-weight-bold">Numéros de téléphone:</p>
+          <p class="font-italic">0 692 866 397 - 0 692 857 407</p>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <p class="text-uppercase font-weight-bold text-xs-center">ENVOYEZ-NOUS UN MESSAGE !</p>
+        <form id="formulaire_contact-section">
+          <div class="form-group row">
+            <div class="col-sm-12">
+            <input type="text" class="form-control" placeholder="Votre prénom et nom">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+            <input type="email" class="form-control" placeholder="Votre adresse e-mail">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+            <input type="text" class="form-control" placeholder="L'objet de votre message">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+            <textarea class="form-control" placeholder="Votre message"></textarea>
+            </div>
+          </div>
+          <button type="submit" id="sendbuton" class="btn btn-secondary">ENVOYEZ</button>
+        </form>
+      </div>
+    </section>
+    
+  </div>
+{% endblock %}

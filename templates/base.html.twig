@@ -3,10 +3,131 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="école danse country île de la Réunion">
+        <meta name="description" content="Numéro 1 des écoles de danse Country à l'île de la Réunion">
+        <link rel="icon" type="image/png" href="{{ asset('images/icon_logo_min.png') }}" />
+
+        <!-- CSS STYLE -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        <!-- JQUERY SCRIPT -->
+        <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+        <script>
+
+            $(document).ready(function(){
+                //alert('ok')
+                $('.img_animations a').hover(function(){
+                    $(this).children('.hover_animation').fadeIn()
+                }, function(){
+                    $('.hover_animation').fadeOut()
+                });
+
+            });
+
+        </script>
     </head>
     <body>
+        <!-- HEADER section -->
+        <header>
+            <div id="box_logo" class="container height-100pc">
+                <a id="lien_index" href="/">
+                    <img id="logo_header" src="images/logo_vn.png"/>
+                    <img id="title_header" src="images/countrydanceacademy.png"/>
+                </a>
+            </div>
+
+            <a id="contenu_ruban1" href="espace-membre.html" class="flexbox-column">
+                <img class="icon_header" src="images/icon_connexion.png" alt="Espace Membre"/>
+                <p class="hidden">Membres</p>
+            </a>
+            <img id="ruban1" class="ruban" src="images/ruban.png"/>
+            <div id="cadre_message"><img id="img_enveloppe" src="images/enveloppe.png"/><span>3</span></div>
+
+
+        </header>
+
+        <!-- NAVIGATION section -->
+        <nav id="navigation">
+            <div class="container height-100pc">
+                <ul class="height-100pc">
+                    <li><a href="animations">Animations</a></li>
+                    <li><a href="https://www.facebook.com/countryreunion974/?fref=ts" target="blank">Actualités</a></li>
+                    <li><a href="historique">Historique</a></li>
+                    <li><a href="bibliographie">Bibliographie</a></li>
+                    <li><a href="telechargement">Téléchargement</a></li>
+                    <li><a href="liens-utiles">Liens utiles</a></li>
+                    <li><a href="livre-d-or">Livre d'Or</a></li>
+                    <li><a href="contact">Contactez-nous</a></li>
+                    <li class="hidden"><a href="espace-membre">Espace membre</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- NAVIGATION RESPONSIVE -->
+
+        <nav id="nav_responsive" class="navbar navbar-light bg-faded hidden-lg-up">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                    &#9776;
+                </button>
+                <img id="title_responsive" src="images/countrydanceacademy.png" alt="logo country dance academy"/>
+                <a id="logo_connection" href="espace-membre.html">
+                    <img class="float-right" src="images/icon_connection_noir.png" alt="connection"/>
+                </a>
+
+            </div>
+        </nav>
+
+        <div class="collapse" id="exCollapsingNavbar">
+            <div class="bg-faded p-a-1">
+                <div class="container">
+                    <ul class="height-100pc">
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="animations">Animations</a></li>
+                        <li><a href="https://www.facebook.com/countryreunion974/?fref=ts" target="blank">Actualités</a></li>
+                        <li><a href="historique">Historique</a></li>
+                        <li><a href="bibliographie">Bibliographie</a></li>
+                        <li><a href="telechargement">Téléchargement</a></li>
+                        <li><a href="liens-utiles">Liens utiles</a></li>
+                        <li><a href="livre-d-or">Livre d'Or</a></li>
+                        <li><a href="contact">Contactez-nous</a></li>
+                        <li><a href="espace-membre">Espace membre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <!-- FOOTER section -->
+        <footer>
+            <div id="box_parallax">
+                <div class="container height-100pc">
+                    <div id="info-contact-footer" class="col-md-6 col-sm-12 col-xs-12 height-100pc">
+                        <img class="col-md-4 col-sm-5 col-xs-4" id="logo_footer" src="images/logo_vb.png"/>
+                        <div class="col-md-8 col-sm-7 col-xs-8" id="coordonnees_footer">
+                            <p class="text-uppercase font-weight-bold">COUNTRY DANCE ACADEMY</p>
+                            <p class="font-italic font-weight-bold">Adresse postale:</p>
+                            <p class="font-italic">83 rue Amiral Lacaze<br/>97480 Saint-Joseph<br/>Ile de la Réunion - France</p>
+                            <p class="font-italic font-weight-bold">Numéros de téléphone:</p>
+                            <p class="font-italic">0 692 866 397 - 0 692 857 407</p>
+                        </div>
+                    </div>
+                    <div id="info-social-footer" class="offset-md-2 col-md-4 col-sm-12 col-xs-12 height-100pc">
+                        <a href="https://www.facebook.com/countryreunion974/?fref=ts" target="blank"><img class="col-xs-3" src="images/Facebook.png"/>
+                            <p class="text-uppercase font-weight-bold">Suivez-nous sur facebook !</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="mentions">
+                <p>Mentions Légales - COUNTRY DANCE ACADEMY 2016</p>
+            </div>
+
+        </footer>
     </body>
 </html>
+
