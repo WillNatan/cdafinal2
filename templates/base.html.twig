@@ -36,17 +36,17 @@
         <header>
             <div id="box_logo" class="container height-100pc">
                 <a id="lien_index" href="/">
-                    <img id="logo_header" src="images/logo_vn.png"/>
-                    <img id="title_header" src="images/countrydanceacademy.png"/>
+                    <img id="logo_header" src="{{ asset('images/logo_vn.png') }}"/>
+                    <img id="title_header" src="{{ asset('images/countrydanceacademy.png') }}"/>
                 </a>
             </div>
 
             <a id="contenu_ruban1" href="espace-membre.html" class="flexbox-column">
-                <img class="icon_header" src="images/icon_connexion.png" alt="Espace Membre"/>
+                <img class="icon_header" src="{{ asset('images/icon_connexion.png') }}" alt="Espace Membre"/>
                 <p class="hidden">Membres</p>
             </a>
-            <img id="ruban1" class="ruban" src="images/ruban.png"/>
-            <div id="cadre_message"><img id="img_enveloppe" src="images/enveloppe.png"/><span>3</span></div>
+            <img id="ruban1" class="ruban" src="{{ asset('images/ruban.png') }}"/>
+            <div id="cadre_message"><img id="img_enveloppe" src="{{ asset('images/enveloppe.png') }}"/><span>3</span></div>
 
 
         </header>
@@ -75,9 +75,9 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                     &#9776;
                 </button>
-                <img id="title_responsive" src="images/countrydanceacademy.png" alt="logo country dance academy"/>
+                <img id="title_responsive" src="{{ asset('images/countrydanceacademy.png') }}" alt="logo country dance academy"/>
                 <a id="logo_connection" href="espace-membre.html">
-                    <img class="float-right" src="images/icon_connection_noir.png" alt="connection"/>
+                    <img class="float-right" src="{{ asset('images/icon_connection_noir.png') }}" alt="connection"/>
                 </a>
 
             </div>
@@ -107,7 +107,7 @@
             <div id="box_parallax">
                 <div class="container height-100pc">
                     <div id="info-contact-footer" class="col-md-6 col-sm-12 col-xs-12 height-100pc">
-                        <img class="col-md-4 col-sm-5 col-xs-4" id="logo_footer" src="images/logo_vb.png"/>
+                        <img class="col-md-4 col-sm-5 col-xs-4" id="logo_footer" src="{{ asset('images/logo_vb.png') }}"/>
                         <div class="col-md-8 col-sm-7 col-xs-8" id="coordonnees_footer">
                             <p class="text-uppercase font-weight-bold">COUNTRY DANCE ACADEMY</p>
                             <p class="font-italic font-weight-bold">Adresse postale:</p>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div id="info-social-footer" class="offset-md-2 col-md-4 col-sm-12 col-xs-12 height-100pc">
-                        <a href="https://www.facebook.com/countryreunion974/?fref=ts" target="blank"><img class="col-xs-3" src="images/Facebook.png"/>
+                        <a href="https://www.facebook.com/countryreunion974/?fref=ts" target="blank"><img class="col-xs-3" src="{{ asset('images/Facebook.png') }}"/>
                             <p class="text-uppercase font-weight-bold">Suivez-nous sur facebook !</p>
                         </a>
                     </div>
