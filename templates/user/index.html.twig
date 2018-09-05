@@ -13,6 +13,17 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Roles</th>
+                <th>Firstname</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>NumeroFix</th>
+                <th>NumeroPortable</th>
+                <th>Adresse1</th>
+                <th>Adresse2</th>
+                <th>AdresseComplement</th>
+                <th>NumeroAppartement</th>
+                <th>CodePostal</th>
+                <th>Ville</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +35,17 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.birthday ? user.birthday|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.numeroFix }}</td>
+                <td>{{ user.numeroPortable }}</td>
+                <td>{{ user.adresse1 }}</td>
+                <td>{{ user.adresse2 }}</td>
+                <td>{{ user.adresseComplement }}</td>
+                <td>{{ user.numeroAppartement }}</td>
+                <td>{{ user.codePostal }}</td>
+                <td>{{ user.ville }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
@@ -31,7 +53,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="17">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
