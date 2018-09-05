@@ -70,8 +70,9 @@ class FrontController extends AbstractController
     public function livreOr(Request $request): Response
     {
         $submit = $request->request->get('submited');
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+        echo $user;
         // if sublited we treate
         if ($submit) {
             $message = $request->request->get('msg');
