@@ -12,26 +12,20 @@
         
        <div id="livre_dor" class="container">             
           <div class="col-md-12">
-            @php
-                $count = 1;
-            @endphp
-            @forelse ($livreOrs as $livreOr)
 
-            <blockquote class="blockquote @php if(($count%2) == 0) { @endphp blockquote-reverse @php } @endphp "> 
-                <p class="m-b-0">{{ $livreOr->message }}</p>
-                <footer class="blockquote-footer">
-                <cite title="Source Title">
-                  @php $source = App\user::find($livreOr->user_id) @endphp
-                  {{ $source->name }}
-                </cite>
-                </footer>
-            </blockquote> 
-            @php
-                $count++;
-            @endphp
-            @empty
-                <p>No livre d'Or</p>
-            @endforelse               
+            {% for LivreOr in LivreOrs %}
+
+
+                <blockquote class="blockquote {% if((loop.index % 2) == 0) %} blockquote-reverse   {% endif %} ">
+                    <p class="m-b-0">{{ LivreOr.message }}</p>
+                    <footer class="blockquote-footer">
+                    <cite title="Source Title">
+                    </cite>
+                    </footer>
+                </blockquote>
+
+            {% endfor %}
+
           </div>
           
        </div>
@@ -41,28 +35,14 @@
       </div>
             <div class="col-md-6 col-sm-12 col-xs-12" style="width: 70%; margin: 0 auto; float: none;">
         <p class="text-uppercase font-weight-bold text-xs-center">ENVOYEZ-NOUS UN MESSAGE !</p>
-        <form id="formulaire_contact-section">
+        <form id="formulaire_contact-section" method="POST" action="/livre-d-or">
           <div class="form-group row">
             <div class="col-sm-12">
-            <input type="text" class="form-control" placeholder="Votre prénom et nom">
+            <textarea class="form-control" name="msg" placeholder="Votre message"></textarea>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-            <input type="email" class="form-control" placeholder="Votre adresse e-mail">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-            <input type="text" class="form-control" placeholder="L'objet de votre message">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-            <textarea class="form-control" placeholder="Votre message"></textarea>
-            </div>
-          </div>
-          <button type="submit" id="sendbuton" class="btn btn-secondary">ENVOYEZ</button>
+            <input type="hidden" name="submited" value="true"></input>
+          <button type="submit" id="sendbuton"  class="btn btn-secondary">ENVOYEZ</button>
         </form>
       </div>
 </section>

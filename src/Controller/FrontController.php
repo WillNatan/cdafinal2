@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\LivreOr;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class FrontController extends AbstractController
 {
+
     /**
      * @Route("/", name="index", methods="GET")
      */
@@ -62,11 +65,31 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/livre-d-or", name="livre-d-or", methods="GET")
+     * @Route("/livre-d-or", name="livre-d-or", methods="GET|POST")
      */
-    public function livreOr(): Response
+    public function livreOr(Request $request): Response
     {
-        return $this->render('frontend/livre-d-or.html.twig');
+        $submit = $request->request->get('submited');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        // if sublited we treate
+        if ($submit) {
+            $message = $request->request->get('msg');
+            if (strlen($message) > 1)
+            {
+                $entityManager = $this->getDoctrine()->getManager();
+                $product = new LivreOr();
+                $product->setMessage($message);
+                $entityManager->persist($product);
+                $entityManager->flush();
+            }
+        }
+
+
+        $LivreOrs = $this->getDoctrine()
+            ->getRepository(LivreOr::class)
+            ->findAll();
+        return $this->render('frontend/livre-d-or.html.twig' , ['LivreOrs' => $LivreOrs]);
     }
 
     /**
