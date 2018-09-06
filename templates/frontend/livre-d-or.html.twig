@@ -9,41 +9,50 @@
       <div class="jumbotron height-100pc">
         <center><h1 class="titre_rubrique">Livre d'Or</h1></center>
         <hr class="m-y-2">
-        
+
+
        <div id="livre_dor" class="container">             
           <div class="col-md-12">
 
             {% for LivreOr in LivreOrs %}
 
-
+                {% if LivreOr.statut == 1 %}
                 <blockquote class="blockquote {% if((loop.index % 2) == 0) %} blockquote-reverse   {% endif %} ">
                     <p class="m-b-0">{{ LivreOr.message }}</p>
                     <footer class="blockquote-footer">
                     <cite title="Source Title">
+                        {{ LivreOr.username }}
                     </cite>
                     </footer>
                 </blockquote>
-
+                {% endif %}
             {% endfor %}
 
           </div>
           
        </div>
-       
+
        <hr class="m-y-2">
        
       </div>
             <div class="col-md-6 col-sm-12 col-xs-12" style="width: 70%; margin: 0 auto; float: none;">
         <p class="text-uppercase font-weight-bold text-xs-center">ENVOYEZ-NOUS UN MESSAGE !</p>
+                {% if app.user %}
         <form id="formulaire_contact-section" method="POST" action="/livre-d-or">
           <div class="form-group row">
             <div class="col-sm-12">
             <textarea class="form-control" name="msg" placeholder="Votre message"></textarea>
             </div>
           </div>
-            <input type="hidden" name="submited" value="true"></input>
+            <input type="hidden" name="submitted" value="true"></input>
           <button type="submit" id="sendbuton"  class="btn btn-secondary">ENVOYEZ</button>
         </form>
+                    {% else %}
+                        <div style="text-align: center">
+                            <a href="{{ path('login') }}" ><button class="btn btn-success">Veuillez vous authentifier</button></a>
+                        </div>
+
+                {% endif %}
       </div>
 </section>
     

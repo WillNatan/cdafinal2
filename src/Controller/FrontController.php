@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class FrontController extends AbstractController
 {
 
     /**
-     * @Route("/", name="index", methods="GET")
+     * @Route("/", name="homepage", methods="GET")
      */
     public function index(): Response
     {
@@ -67,13 +69,16 @@ class FrontController extends AbstractController
     /**
      * @Route("/livre-d-or", name="livre-d-or", methods="GET|POST")
      */
-    public function livreOr(Request $request): Response
+    public function livreOr(Request $request, TokenStorageInterface $tokenStorage): Response
     {
-        $submit = $request->request->get('submited');
+        $submit = $request->request->get('submitted');
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-        echo $user;
-        // if sublited we treate
+        $user=$tokenStorage->getToken()->getUser();
+
+
+
+
+        // if submitted we treate
         if ($submit) {
             $message = $request->request->get('msg');
             if (strlen($message) > 1)
@@ -81,6 +86,9 @@ class FrontController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $product = new LivreOr();
                 $product->setMessage($message);
+                $product->setDate(new \datetime());
+                $product->setStatut(false);
+                $product->setUsername($user->getUsername());
                 $entityManager->persist($product);
                 $entityManager->flush();
             }

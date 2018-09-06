@@ -31,6 +31,11 @@ class LivreOr
      */
     private $statut;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Username;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +72,18 @@ class LivreOr
     public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->Username;
+    }
+
+    public function setUsername(string $Username): self
+    {
+        $this->Username = $Username;
 
         return $this;
     }

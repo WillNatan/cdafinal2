@@ -23,9 +23,6 @@ class UserController extends AbstractController
      */
     public function index( Request $request,UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $users = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
 
 
         $user = new User();
@@ -33,8 +30,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
@@ -58,6 +53,9 @@ class UserController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+
+        $kernel = $this->container->get('kernel');
+        $dir = $kernel->getRootDir();
         $user = new User();
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);

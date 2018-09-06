@@ -64,11 +64,6 @@ class User implements UserInterface
     private $name;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $birthday;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $numeroFix;
@@ -107,6 +102,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $ville;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthday;
 
     
     public function __construct()
@@ -206,18 +206,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
-    {
-        return $this->birthday;
-    }
-
-    public function setBirthday(\DateTimeInterface $birthday): self
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
     public function getNumeroFix(): ?string
     {
         return $this->numeroFix;
@@ -310,6 +298,18 @@ class User implements UserInterface
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(\DateTimeInterface $birthday): self
+    {
+        $this->birthday = $birthday;
 
         return $this;
     }
