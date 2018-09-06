@@ -16,7 +16,7 @@
             <div id="box_connexion" class="col-md-6 col-sm-12 col-xs-12 flexbox-column">
                 <img src="{{ asset('images/icon_connection_noir.png') }}"/>
                 <p class="text-uppercase font-weight-bold text-xs-center">déjà membre ?</p>
-                <p class="font-weight-bold text-xs-center">Connectez-vous !</p>
+
                 <form id="formulaire_contact-section" class="col-md-12 col-xs-12" action="{{ path('login') }}" method="POST">
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -136,5 +136,4 @@
 
     </div>
 
-    <a href="{{ path('user_new') }}">Create new</a>
 {% endblock %}
