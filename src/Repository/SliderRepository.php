@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Slides;
+use App\Entity\Slider;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Slides|null find($id, $lockMode = null, $lockVersion = null)
- * @method Slides|null findOneBy(array $criteria, array $orderBy = null)
- * @method Slides[]    findAll()
- * @method Slides[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Slider|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Slider|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Slider[]    findAll()
+ * @method Slider[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SlidesRepository extends ServiceEntityRepository
+class SliderRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Slides::class);
+        parent::__construct($registry, Slider::class);
     }
 
 //    /**
-//     * @return Slides[] Returns an array of Slides objects
+//     * @return Slider[] Returns an array of Slider objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class SlidesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Slides
+    public function findOneBySomeField($value): ?Slider
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

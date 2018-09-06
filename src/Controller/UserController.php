@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
-     * @Route("/espace-memb")
+ * @Route("/user")
  */
 class UserController extends AbstractController
 {
@@ -54,9 +54,38 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/new", name="user_new", methods="GET|POST")
+     */
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = new User();
+        $form = $this->createForm(User1Type::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="user_show", methods="GET")
      */
-    public function profil(User $user): Response
+    public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
@@ -94,8 +123,4 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
-    /**
-     * @Route("/profil", name="user_delete", methods="DELETE")
-     */
-
 }
