@@ -91,7 +91,11 @@ class FrontController extends AbstractController
                 $product->setUsername($user->getUsername());
                 $entityManager->persist($product);
                 $entityManager->flush();
+
+
             }
+
+            return $this->redirectToRoute('livre-d-or');
         }
 
 

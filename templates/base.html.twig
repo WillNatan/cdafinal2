@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+        <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
+
         <!-- JQUERY SCRIPT -->
         <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -30,8 +32,38 @@
             });
 
         </script>
+
+        <style>
+
+            .dashboard-bar{
+                background-color: #383838;
+                color: #f5f5f5;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 250;
+                border-radius: 0;
+
+                -webkit-box-shadow: 0px 3px 14px 0px rgba(0,0,0,0.42);
+                -moz-box-shadow: 0px 3px 14px 0px rgba(0,0,0,0.42);
+                box-shadow: 0px 3px 14px 0px rgba(0,0,0,0.42);
+            }
+
+        </style>
     </head>
     <body>
+
+
+   {% if app.user  %}
+
+      {% if app.user.roles[0] == "ROLE_ADMIN" %}
+          <div class="alert dashboard-bar" >
+              <span>Hello {{ app.user.username }} !</span>
+              <a href="{{ path('admin') }}">Cliquez ici </a> pour accéder au dashboard
+
+          </div>
+      {%  endif %}
+   {% endif %}
         <!-- HEADER section -->
         <header>
             <div id="box_logo" class="container height-100pc">
@@ -41,10 +73,19 @@
                 </a>
             </div>
 
-            <a id="contenu_ruban1" href="{{ path('user_index') }}" class="flexbox-column">
-                <img class="icon_header" src="{{ asset('images/icon_connexion.png') }}" alt="Espace Membre"/>
-                <p class="hidden">Membres</p>
-            </a>
+
+
+            {% if not app.user %}
+                <a id="contenu_ruban1" href="{{ path('espace_membre') }}" class="flexbox-column">
+                    <img class="icon_header" src="{{ asset('images/icon_connexion.png') }}" alt="Espace Membre"/>
+                    <p class="hidden">Membres</p>
+                </a>
+            {% else %}
+                <a id="contenu_ruban1" href="{{ path('logout') }}" class="flexbox-column">
+                    <img class="icon_header" src="{{ asset('images/icon_connexion.png') }}" alt="Espace Membre"/>
+                    <p class="hidden">Déconnexion</p>
+                </a>
+            {% endif %}
             <img id="ruban1" class="ruban" src="{{ asset('images/ruban.png') }}"/>
             <div id="cadre_message"><img id="img_enveloppe" src="{{ asset('images/enveloppe.png') }}"/><span>3</span></div>
 
@@ -63,12 +104,17 @@
                     <li><a href="liens-utiles">Liens utiles</a></li>
                     <li><a href="livre-d-or">Livre d'Or</a></li>
                     <li><a href="contact">Contactez-nous</a></li>
-                    <li class="hidden"><a href="{{ path('user_index') }}">Espace membre</a></li>
+                    {% if not app.user %}
+                        <li class="hidden"><a href="{{ path('user_index') }}">Espace membre</a></li>
+                    {% else %}
+                        <li class="hidden"><a href="{{ path('espace_membre') }}">Mon compte</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
 
         <!-- NAVIGATION RESPONSIVE -->
+
 
         <nav id="nav_responsive" class="navbar navbar-light bg-faded hidden-lg-up">
             <div class="container">
@@ -96,12 +142,19 @@
                         <li><a href="liens-utiles">Liens utiles</a></li>
                         <li><a href="livre-d-or">Livre d'Or</a></li>
                         <li><a href="contact">Contactez-nous</a></li>
-                        <li><a href="{{ path('user_index') }}">Espacedddd membre</a></li>
+                        {% if not app.user %}
+                            <li class="hidden"><a href="{{ path('user_index') }}">Espace membre</a></li>
+                        {% else %}
+                            <li class="hidden"><a href="{{ path('user_index') }}">Mon compte</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </div>
         {% block body %}{% endblock %}
+
+
+
         <!-- FOOTER section -->
         <footer>
             <div id="box_parallax">

@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
- * @UniqueEntity(fields="email", message="Email already taken")
- * @UniqueEntity(fields="username", message="Username already taken")
+ * @UniqueEntity(fields="email", message="Cette adresse mail a déjà été utilisée")
+ * @UniqueEntity(fields="username", message="Ce nom d'utilisateur a déjà été utilisé")
  */
 class User implements UserInterface
 {
@@ -36,7 +36,7 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @Assert\Length(min="4", minMessage="Votre mot de passe doit faire minimun 8 caractères")
      */
     private $plainPassword;
 

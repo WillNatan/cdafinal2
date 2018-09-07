@@ -2,14 +2,59 @@
 
 {% block body %}
 
-    <h2>Hello Motherfucker</h2>
+    <div id="content" class="container">
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstname, {'label':'Votre identitité','attr': {'placeholder': 'Prénom'}}) }}
-    {{ form_row(registrationForm.name, {'label':' ','attr': {'placeholder': 'Nom'}}) }}
-    {{ form_row(registrationForm.birthday, {'label':'Votre identitité','attr': {'placeholder': 'Prénom'}}) }}
-    {{ form_row(registrationForm.name, {'attr': {'placeholder': 'Nom'}}) }}
-    {{ form_row(registrationForm.name, {'attr': {'placeholder': 'Nom'}}) }}
-    {{ form_end(registrationForm) }}
+        <section id="espace_membre" class="row padding">
+            <h2 class="titre_rubrique text-xs-center">ESPACE MEMBRE</h2>
+
+            <div id="box_connexion" class="col-md-6 col-sm-12 col-xs-12 flexbox-column">
+                <img src="{{ asset('images/icon_connection_noir.png') }}"/>
+                <p class="text-uppercase font-weight-bold text-xs-center">déjà membre ?</p>
+
+                <form id="formulaire_contact-section" class="col-md-12 col-xs-12" action="{{ path('login1') }}" method="POST">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Votre pseudo" name="_username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="password" class="form-control" placeholder="Votre mot de passe" name="_password">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="sendbuton" class="btn btn-secondary">ENVOYEZ</button>
+                </form>
+            </div>
+
+            <div id="box_inscription" class="col-md-6 col-sm-12 col-xs-12 flexbox-column">
+                <img src="{{ asset('images/icon_inscription_noir.png') }}"/>
+                <p class="text-uppercase font-weight-bold text-xs-center">nouveau membre ?</p>
+                <p class="font-weight-bold text-xs-center">Inscrivez-vous !</p>
+
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.firstname, {'label':'Votre identitité','attr': {'placeholder': 'Prénom'}}) }}
+                {{ form_row(registrationForm.name, {'label':' ','attr': {'placeholder': 'Nom'}}) }}
+                {{ form_row(registrationForm.birthday, {'label':'Votre identitité','attr': {'placeholder': 'Prénom'}}) }}
+                {{ form_row(registrationForm.username, {'label':'Votre identitité','attr': {'placeholder': 'Votre pseudo'}}) }}
+                {{ form_row(registrationForm.email, {'attr': {'placeholder': 'Adresse eamil'}}) }}
+                {{ form_row(registrationForm.numeroFix, {'attr': {'placeholder': 'Numéro fixe'}}) }}
+                {{ form_row(registrationForm.numeroPortable, {'attr': {'placeholder': 'Numéro de portable'}}) }}
+                {{ form_row(registrationForm.adresse1, {'attr': {'placeholder': 'exemple: 1, rue de la Victoire...'}}) }}
+                {{ form_row(registrationForm.adresse2, {'attr': {'placeholder': 'Complément d\'adresse, lottissement, etc'}}) }}
+                {{ form_row(registrationForm.adresseComplement, {'attr': {'placeholder': 'Résidence, numéro de bâtiment, etc'}}) }}
+                {{ form_row(registrationForm.numeroAppartement, {'attr': {'placeholder': 'Numéro d\'appartement'}}) }}
+                {{ form_row(registrationForm.codePostal, {'attr': {'placeholder': 'Code postal'}}) }}
+                {{ form_row(registrationForm.ville, {'attr': {'placeholder': 'Ville'}}) }}
+                {{ form_row(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+
+                <button type="submit" class="btn btn-success">Inscription</button>
+                {{ form_end(registrationForm) }}
+            </div>
+
+        </section>
+
+
+    </div>
 
 {% endblock %}
