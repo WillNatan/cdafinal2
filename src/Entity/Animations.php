@@ -22,7 +22,7 @@ class Animations
     private $imageName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $imageUrl;
 
@@ -53,12 +53,12 @@ class Animations
         return $this;
     }
 
-    public function getImageUrl(): ?string
+    public function getImageUrl()
     {
         return $this->imageUrl;
     }
 
-    public function setImageUrl(string $imageUrl): self
+    public function setImageUrl( $imageUrl)
     {
         $this->imageUrl = $imageUrl;
 
