@@ -1,0 +1,82 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}MsgDuJour index{% endblock %}
+
+
+
+{% block body %}
+
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon">
+                    <i class="material-icons">message</i>
+                </div>
+                <h4 class="card-title ">Configurer le message du jour</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>Id</th>
+                            <th>Message</th>
+                            <th>Actions</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                        {% for msg_du_jour in msg_du_jours %}
+
+                            <tr>
+                                <td>{{ msg_du_jour.id }}</td>
+                                <td>{{ msg_du_jour.Message }}</td>
+                                <td>
+                                    <a href="{{ path('msg_du_jour_show', {'id': msg_du_jour.id}) }}"><button class="btn btn-primary"><i class="fa fa-eye"></i></button></a>
+                                    <a href="{{ path('msg_du_jour_edit', {'id': msg_du_jour.id}) }}"><button class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+
+                                <td colspan="6">Vous n'avez pas encore défini de message du jour. Cliquez sur le bouton ci-dessous pour en créer un.</td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                    <button class="btn btn-warning togglebutton" id="form_message_submit" onclick="show_form()">Créer un nouveau message</button>
+                    <script>
+
+                       function show_form () {
+
+                            $('#form_messageNew').show(1000)
+                            $('#form_message_submit').hide();
+                        }
+                    </script>
+
+                    <div id="form_messageNew" style="display: none;">
+                        {% if form is defined %}
+                            <hr>
+
+                            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+                            {{ include('msg_du_jour/_form.html.twig') }}
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

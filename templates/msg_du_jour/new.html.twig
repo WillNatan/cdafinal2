@@ -1,0 +1,31 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New MsgDuJour{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon">
+                    <i class="material-icons">message</i>
+                </div>
+                <h4 class="card-title ">Créer un message du jour</h4>
+            </div>
+            <div class="card-body">
+                {{ include('msg_du_jour/_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('msg_du_jour_index') }}">
+        <button class="btn btn-primary btn-link">
+            Retour
+            <div class="ripple-container">
+            </div>
+        </button>
+    </a>
+{% endblock %}
