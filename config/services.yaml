@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     image_dir: '%kernel.project_dir%/public/images'
+    slide_dir: '%kernel.project_dir%/public/slides'
 
 services:
     # default configuration for services in *this* file

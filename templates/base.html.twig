@@ -15,9 +15,8 @@
 
         <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
 
-        <!-- JQUERY SCRIPT -->
-        <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+
 
         <script>
 
@@ -76,14 +75,14 @@
 
 
             {% if not app.user %}
-                <a id="contenu_ruban1" href="{{ path('espace_membre') }}" class="flexbox-column">
+                <a id="contenu_ruban1" href="{{ path('membres_route') }}" class="flexbox-column">
                     <img class="icon_header" src="{{ asset('images/icon_connexion.png') }}" alt="Espace Membre"/>
                     <p class="hidden">Membres</p>
                 </a>
             {% else %}
                 <a id="contenu_ruban1" href="{{ path('logout') }}" class="flexbox-column">
                     <img class="icon_header" src="{{ asset('images/icon_connexion.png') }}" alt="Espace Membre"/>
-                    <p class="hidden">Déconnexion</p>
+                    <p class="hidden">Compte</p>
                 </a>
             {% endif %}
             <img id="ruban1" class="ruban" src="{{ asset('images/ruban.png') }}"/>
@@ -105,9 +104,9 @@
                     <li><a href="livre-d-or">Livre d'Or</a></li>
                     <li><a href="contact">Contactez-nous</a></li>
                     {% if not app.user %}
-                        <li class="hidden"><a href="{{ path('user_index') }}">Espace membre</a></li>
+                        <li class="hidden"><a href="{{ path('membres_route') }}">Espace membre</a></li>
                     {% else %}
-                        <li class="hidden"><a href="{{ path('espace_membre') }}">Mon compte</a></li>
+                        <li class="hidden"><a href="{{ path('membres_route') }}">Mon compte</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -140,7 +139,7 @@
                         <li><a href="bibliographie">Bibliographie</a></li>
                         <li><a href="telechargement">Téléchargement</a></li>
                         <li><a href="liens-utiles">Liens utiles</a></li>
-                        <li><a href="livre-d-or">Livre d'Or</a></li>
+                        <li><a href="{{ path('livre_or') }}">Livre d'Or</a></li>
                         <li><a href="contact">Contactez-nous</a></li>
                         {% if not app.user %}
                             <li class="hidden"><a href="{{ path('user_index') }}">Espace membre</a></li>
@@ -182,5 +181,9 @@
 
         </footer>
     </body>
+    <!-- JQUERY SCRIPT -->
+    <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 </html>
 

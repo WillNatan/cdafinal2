@@ -1,0 +1,24 @@
+
+<div class="card ">
+    <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+            <i class="material-icons">mail_outline</i>
+        </div>
+
+    </div>
+    <div class="card-body ">
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_widget(form) }}
+            </div>
+
+
+    </div>
+    <div class="card-footer ">
+        <button class="btn btn-success">{{ button_label|default('Envoyer') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}
+
+
+

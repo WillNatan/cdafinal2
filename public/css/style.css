@@ -386,6 +386,10 @@ header a:hover {
 	padding : 0px; margin : 0px;
 }
 
+.force-opacity{
+	opacity: 1;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (min-width:1290px){

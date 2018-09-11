@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use App\Entity\User;
 class AdminController extends AbstractController
 {
     /**
@@ -20,7 +20,7 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/logi", name="logi")
+     * @Route("/login", name="login")
      */
         public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -30,13 +30,14 @@ class AdminController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        echo $lastUsername;
+
 
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
     }
+
 
 
 }

@@ -35,6 +35,12 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
+     */
+    private $statut;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(min="4", minMessage="Votre mot de passe doit faire minimun 8 caractères")
      */
@@ -310,6 +316,18 @@ class User implements UserInterface
     public function setBirthday(\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

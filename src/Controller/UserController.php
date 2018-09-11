@@ -4,48 +4,59 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\User1Type;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-    use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/user")
+ * @Route("admin/user")
  */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods="GET|POST")
-     * @param $request
-     * @param $passwordEncoder
-     * @return Response
+     * @Route("/", name="user_index", methods="GET|POST|DELETE")
      */
-    public function index( Request $request,UserPasswordEncoderInterface $passwordEncoder): Response
+    public function index(UserRepository $userRepository, Request $request): Response
     {
 
-
-        $user = new User();
-        $form = $this->createForm(User1Type::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+        $users = $userRepository->findAll();
+        $em = $this->getDoctrine()->getManager();
 
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            if(!is_null($check = $request->get('checkbox') )){
+                foreach ($users as $user){
+                    foreach ($check as $key=>$value){
+                        if($user->getId() == $key){
+                            if($state = $request->get('state') == 'enable'){
+                                $user->setStatut(true);
+                            }
+                            else if($state = $request->get('state') == 'disable'){
+                                $user->setStatut(false);
+                            }
+                            else if($state = $request->get('state') == 'delete'){
+                                if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+                                    $em = $this->getDoctrine()->getManager();
+                                    $em->remove($user);
+                                    $em->flush();
+                                }
+                            }
+                        }
+                    }
+                }
 
-            return $this->redirectToRoute('user_index');
-        }
+                $em->persist($user);
+                $em->flush();
+            }
 
-        return $this->render('user/index.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
 
+
+
+
+        return $this->render('user/index.html.twig', ['user' => $userRepository->findAll()]);
     }
 
     /**
@@ -54,8 +65,6 @@ class UserController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
-        $kernel = $this->container->get('kernel');
-        $dir = $kernel->getRootDir();
         $user = new User();
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
@@ -66,6 +75,7 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
+            $user->setStatut(false);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

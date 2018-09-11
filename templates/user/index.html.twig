@@ -1,139 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}Espace Membre{% endblock %}
 
 {% block body %}
 
 
-    <!-- CONTENT section -->
-    <div id="content" class="container">
-
-
-        <!-- Inscription/Connexion -->
-        <section id="espace_membre" class="row padding">
-            <h2 class="titre_rubrique text-xs-center">ESPACE MEMBRE</h2>
-
-            <div id="box_connexion" class="col-md-6 col-sm-12 col-xs-12 flexbox-column">
-                <img src="{{ asset('images/icon_connection_noir.png') }}"/>
-                <p class="text-uppercase font-weight-bold text-xs-center">déjà membre ?</p>
-
-                <form id="formulaire_contact-section" class="col-md-12 col-xs-12" action="{{ path('login') }}" method="POST">
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" placeholder="Votre pseudo" name="_username">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input type="password" class="form-control" placeholder="Votre mot de passe" name="_password">
-                        </div>
-                    </div>
-
-                    <button type="submit" id="sendbuton" class="btn btn-secondary">ENVOYEZ</button>
-                </form>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Users</h4>
             </div>
+            <form action="{{ path('user_index') }}" method="post">
+                <div class="p-3">
+                    <span class="text-primary ">Modification en masse</span>
+                    <div class="form-inline">
 
-            <div id="box_inscription" class="col-md-6 col-sm-12 col-xs-12 flexbox-column">
-                <img src="{{ asset('images/icon_inscription_noir.png') }}"/>
-                <p class="text-uppercase font-weight-bold text-xs-center">nouveau membre ?</p>
-                <p class="font-weight-bold text-xs-center">Inscrivez-vous !</p>
-                <!--<form id="formulaire_contact-section" class="col-md-12 col-xs-12">
-
-                    <label for="prenom">Votre identité :</label>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="prenom" type="text" class="form-control" placeholder="Prénom">
-                        </div>
+                        <select name="state" class="form-control state w-25">
+                            <option value="enable">Activé</option>
+                            <option value="disable">Desactivé</option>
+                            <option value="delete">Supprimer</option>
+                        </select>
+                        <input type="submit" class="btn btn-warning submit-bulk" value="MODIFIER">
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="nom" type="text" class="form-control" placeholder="Nom">
-                        </div>
-                    </div>
-
-                    <label for="date-naissance">Votre date de naissance :</label>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="date-naissance" type="date" class="form-control" placeholder="exemple : 12/05/1973">
-                        </div>
-                    </div>
-
-                    <label for="pseudo">Choississez votre pseudo :</label>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="pseudo" type="text" class="form-control" placeholder="Il ne doit pas comporter d'espace">
-                        </div>
-                    </div>
-
-                    <label for="email">Vos coordonnées :</label>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="email" type="email" class="form-control" placeholder="Votre adresse e-mail">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="tel-fixe" type="tel" class="form-control" placeholder="Votre numéro de téléphone fixe">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="tel-portable" type="tel" class="form-control" placeholder="Votre numéro de téléphone portable">
-                        </div>
-                    </div>
-
-                    <label for="rue">Votre adresse postale :</label>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="rue" type="text" class="form-control" placeholder="exemple: 1, rue de la Victoire...">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="complement1" type="text" class="form-control" placeholder="Complément d'adresse, lottissement, etc">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="complement2" type="text" class="form-control" placeholder="Résidence, numéro de bâtiment, etc">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="appart" type="text" class="form-control" placeholder="Numéro d'appartement">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="code-postal" type="number" class="form-control" placeholder="Code postal">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input name="ville" type="text" class="form-control" placeholder="Ville">
-                        </div>
-                    </div>
-
-                    <button type="submit" id="sendbuton" value="ENVOYEZ" class="btn btn-secondary">ENVOYEZ</button>
-                </form> -->
-
-                {{ include('user/_form.html.twig') }}
+                </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>Sélection</th>
+                            <th>Nom de compte</th>
+                            <th>Statut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for users in user %}
+                            <tr>
+                                <td><input class="checkbox" name="checkbox[{{ users.id }}]" type="checkbox"></td>
+                                <td>{{ users.username }}</td>
+                                <td>{{ users.statut ? 'Activé' : 'Desactivé' }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </form>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-        </section>
-
-
+        </div>
     </div>
+
 
 {% endblock %}

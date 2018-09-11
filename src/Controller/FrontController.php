@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\LivreOr;
-use App\Form\UserType;
+use App\Entity\User;
+use App\Form\User1Type;
+use App\Form\FrontLivreOrType;
+use App\Repository\ImageSlideRepository;
+use App\Repository\LivreOrRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
 class FrontController extends AbstractController
 {
@@ -20,9 +23,19 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="homepage", methods="GET")
      */
-    public function index(): Response
+    public function index(ImageSlideRepository $imageSlideRepository, Request $request): Response
     {
-        return $this->render('frontend/index.html.twig');
+        $errorMessage ='';
+       if($user = $this->getUser()){
+           if($user->getStatut()== false){
+               $this->get('security.token_storage')->setToken(null);
+               $errorMessage .= "Votre compte n'est pas encore activé!";
+           }
+       }
+
+
+
+        return $this->render('frontend/index.html.twig', ['image_slides' => $imageSlideRepository->findAll(),'messageError'=>$errorMessage]);
     }
 
 
@@ -66,43 +79,41 @@ class FrontController extends AbstractController
         return $this->render('frontend/liens-utiles.html.twig');
     }
 
+
+
+
     /**
-     * @Route("/livre-d-or", name="livre-d-or", methods="GET|POST")
+     * @Route("/livre-d-or", name="livre_or", methods="GET|POST")
      */
-    public function livreOr(Request $request, TokenStorageInterface $tokenStorage): Response
+    public function livreOr(Request $request, TokenStorageInterface $tokenStorage, LivreOrRepository $livreOrRepository): Response
     {
-        $submit = $request->request->get('submitted');
-        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user=$tokenStorage->getToken()->getUser();
 
+        $livreOr = new LivreOr();
+        $form = $this->createForm(FrontLivreOrType::class, $livreOr);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user=$tokenStorage->getToken()->getUser();
+            $message = $livreOr->getMessage();
+            $livreOr->setMessage($message);
+            $livreOr->setDate(new \datetime());
+            $livreOr->setStatut(false);
+            $livreOr->setUsername($user->getUsername());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($livreOr);
+            $em->flush();
 
-
-        // if submitted we treate
-        if ($submit) {
-            $message = $request->request->get('msg');
-            if (strlen($message) > 1)
-            {
-                $entityManager = $this->getDoctrine()->getManager();
-                $product = new LivreOr();
-                $product->setMessage($message);
-                $product->setDate(new \datetime());
-                $product->setStatut(false);
-                $product->setUsername($user->getUsername());
-                $entityManager->persist($product);
-                $entityManager->flush();
-
-
-            }
-
-            return $this->redirectToRoute('livre-d-or');
+            return $this->redirectToRoute('livre_or');
         }
+        $repository = $this->getDoctrine()->getRepository(LivreOr::class);
+        $messages = $repository->findBy(
+            ['statut' => true]
 
+        );
 
-        $LivreOrs = $this->getDoctrine()
-            ->getRepository(LivreOr::class)
-            ->findAll();
-        return $this->render('frontend/livre-d-or.html.twig' , ['LivreOrs' => $LivreOrs]);
+        return $this->render('frontend/livre-d-or.html.twig' , ['LivreOrs' => $messages,
+            'livre_or' => $livreOr,
+            'form' => $form->createView(),]);
     }
 
     /**
@@ -113,12 +124,37 @@ class FrontController extends AbstractController
         return $this->render('frontend/contact.html.twig');
     }
 
-    /**
-     * @Route("/espace-membre", name="espace-membre", methods="GET")
-     */
-    public function espaceMembre(): Response
-    {
-        return $this->render('frontend/espace-membre.html.twig');
-    }
 
+    /**
+     * @Route("/membres", name="membres_route", methods="GET|POST")
+     */
+    public function espaceMembre( Request $request,UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+
+
+        $user = new User();
+        $form = $this->createForm(User1Type::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $user->setStatut(false);
+
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('membres_route');
+        }
+
+        return $this->render('frontend/espace-membre.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+
+    }
 }
