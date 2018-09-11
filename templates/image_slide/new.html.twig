@@ -1,0 +1,11 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}New ImageSlide{% endblock %}
+
+{% block body %}
+    <h1>Create new ImageSlide</h1>
+
+    {{ include('image_slide/_form.html.twig') }}
+
+    <a href="{{ path('image_slide_index') }}">back to list</a>
+{% endblock %}

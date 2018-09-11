@@ -1,0 +1,30 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}ImageSlide{% endblock %}
+
+{% block body %}
+    <h1>ImageSlide</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image_slide.id }}</td>
+            </tr>
+            <tr>
+                <th>ImageUrl</th>
+                <td>{{ image_slide.imageUrl }}</td>
+            </tr>
+            <tr>
+                <th>Alternative</th>
+                <td>{{ image_slide.alternative }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('image_slide_index') }}">back to list</a>
+
+    <a href="{{ path('image_slide_edit', {'id': image_slide.id}) }}">edit</a>
+
+    {{ include('image_slide/_delete_form.html.twig') }}
+{% endblock %}

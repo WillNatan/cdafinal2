@@ -1,0 +1,38 @@
+<div class="card ">
+    <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+            <i class="material-icons">mail_outline</i>
+        </div>
+
+    </div>
+    <div class="card-body ">
+        {{ form_start(form) }}
+       <span class="text-dark"> {{ form_label(form.imageUrl) }}</span>
+        <div class="form-group">
+            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                <div class="fileinput-new thumbnail">
+                    <img src="{% if last_image is defined %}{{ asset('slides/'~last_image) }}{% else %}{{ asset('dashboard/img/image_placeholder.jpg') }}{% endif %}" alt="Miniature Image">
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                <div>
+                  <span class="btn btn-rose btn-round btn-file">
+                      <span class="fileinput-new">{{ form_label(form.imageUrl) }}</span>
+                      {{ form_widget(form.imageUrl) }}
+                    <span class="fileinput-exists">Changer d'image</span>
+                  </span>
+                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.alternative) }}
+            {{ form_widget(form.alternative) }}
+        </div>
+
+
+    </div>
+    <div class="card-footer ">
+        <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

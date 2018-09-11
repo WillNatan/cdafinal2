@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}LivreOr index{% endblock %}
+
+{% block body %}
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                </div>
+                <h4 class="card-title ">Messages du livre d'or</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <tr>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Username</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for livre_or in livre_ors %}
+                            <tr>
+                                <td>{{ livre_or.message }}</td>
+                                <td>{{ livre_or.date ? livre_or.date|date('Y-m-d') : '' }}</td>
+                                <td>{{ livre_or.statut ? 'Activé' : 'Desactivé' }}</td>
+                                <td>{{ livre_or.Username }}</td>
+                                <td>
+                                    <a href="{{ path('livre_or_show', {'id': livre_or.id}) }}"><button class="btn btn-primary"><i class="fa fa-eye"></i></button></a>
+                                    <a href="{{ path('livre_or_edit', {'id': livre_or.id}) }}"><button class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
