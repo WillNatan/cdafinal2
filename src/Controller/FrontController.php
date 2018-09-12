@@ -17,15 +17,21 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
+use App\Entity\MsgDuJour;
+use App\Repository\MsgDuJourRepository;
 
 class FrontController extends AbstractController
 {
 
     /**
-     * @Route("/", name="homepage", methods="GET")
+     * @Route("/", name="homepage", methods="GET|POST")
      */
-    public function index(ImageSlideRepository $imageSlideRepository, Request $request): Response
+    public function index(MsgDuJourRepository $messageDuJour, ImageSlideRepository $imageSlideRepository, Request $request): Response
     {
+
+
+
+
         $errorMessage ='';
        if($user = $this->getUser()){
            if($user->getStatut()== false){
@@ -35,8 +41,10 @@ class FrontController extends AbstractController
        }
 
 
-
-        return $this->render('frontend/index.html.twig', ['image_slides' => $imageSlideRepository->findAll(),'messageError'=>$errorMessage]);
+        return $this->render('frontend/index.html.twig',
+            ['image_slides' => $imageSlideRepository->findAll(),
+                'message_Du_Jour' => $messageDuJour->findAll(),
+                'messageError'=>$errorMessage]);
     }
 
 
@@ -129,13 +137,15 @@ class FrontController extends AbstractController
     /**
      * @Route("/membres", name="membres_route", methods="GET|POST")
      */
-    public function espaceMembre( Request $request,UserPasswordEncoderInterface $passwordEncoder): Response
+    public function espaceMembre( Request $request,UserPasswordEncoderInterface $passwordEncoder, LivreOrRepository $livreOrRepository): Response
     {
 
 
         $user = new User();
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
@@ -155,7 +165,31 @@ class FrontController extends AbstractController
         return $this->render('frontend/espace-membre.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'LivreOrs' => $livreOrRepository->findBy(array('Username' => $user->getName()))
         ]);
 
+
+
+
     }
+    /**
+     * @Route("/membres/{id}{", name="membres_edit", methods="GET|POST")
+     */
+    public function edit(Request $request, User $user): Response
+    {
+        $form = $this->createForm(User1Type::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
