@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\LivreOr;
 use App\Entity\User;
+use App\Form\AdminUserType;
 use App\Form\User1Type;
 use App\Form\FrontLivreOrType;
 use App\Repository\ImageSlideRepository;

@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class User1Type extends AbstractType
+class AdminUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,6 +37,20 @@ class User1Type extends AbstractType
                 'first_options'  => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Répétez votre mot de passe'),
                 'options' => array('attr' => array('class' => 'form-control')),))
+            ->add('statut',ChoiceType::class, array('label'=>'Statut',
+                'choices'  => array(
+                    'Activé' => true,
+                    'Desactivé' => false,
+                ),'attr'=>array('style'=>'margin-top:15px;', 'class'=>'selectpicker')))
+            ->add('roles',ChoiceType::class, array('label'=>'Role utilisateur',
+                'choices'  => array(
+                    'Utilisateur' => 'ROLE_USER',
+                    'Administrateur' => 'ROLE_ADMIN',
+
+
+                ),
+                'multiple'  => true
+            ,'attr'=>array('style'=>'margin-top:15px;', 'class'=>'selectpicker')))
         ;
     }
 

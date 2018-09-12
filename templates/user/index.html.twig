@@ -23,6 +23,15 @@
                             <option value="disable">Desactivé</option>
                             <option value="delete">Supprimer</option>
                         </select>
+
+                        <div class="form-check ml-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input " id="checkall" type="checkbox" required> Tout sélectionner
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
                         <input type="submit" class="btn btn-warning submit-bulk" value="MODIFIER">
                     </div>
                 </div>
@@ -39,7 +48,14 @@
                         <tbody>
                         {% for users in user %}
                             <tr>
-                                <td><input class="checkbox" name="checkbox[{{ users.id }}]" type="checkbox"></td>
+                                <td><div class="form-check mr-auto">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input checkboxToSelect" type="checkbox" name="checkbox[{{ users.id }}]" required>
+                                            <span class="form-check-sign">
+                  <span class="check"></span>
+                </span>
+                                        </label>
+                                    </div></td>
                                 <td>{{ users.username }}</td>
                                 <td>{{ users.statut ? 'Activé' : 'Desactivé' }}</td>
                             </tr>

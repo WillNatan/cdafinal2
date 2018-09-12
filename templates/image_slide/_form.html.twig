@@ -18,7 +18,7 @@
                   <span class="btn btn-rose btn-round btn-file">
                       <span class="fileinput-new">{{ form_label(form.imageUrl) }}</span>
                       {{ form_widget(form.imageUrl) }}
-                    <span class="fileinput-exists">Changer d'image</span>
+                    <span class="fileinput-exists">{{ form_label(form.imageUrl) }}</span>
                   </span>
                     <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                 </div>

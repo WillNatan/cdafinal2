@@ -27,8 +27,10 @@
                                 <td><img src="{{ asset('slides/'~image_slide.imageUrl) }}" alt="{{ image_slide.alternative }}" width="80" height="80" class="img-fluid"></td>
                                 <td>{{ image_slide.alternative }}</td>
                                 <td>
-                                    <a href="{{ path('image_slide_show', {'id': image_slide.id}) }}"><button class="btn btn-primary"><i class="fa fa-eye"></i></button></a>
-                                    <a href="{{ path('image_slide_edit', {'id': image_slide.id}) }}"><button class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{ path('image_slide_show', {'alternative': image_slide.alternative}) }}"><button class="btn btn-primary"><i class="fa fa-eye"></i></button></a>
+                                        <a href="{{ path('image_slide_edit', {'alternative': image_slide.alternative}) }}"><button class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                    </div>
                                 </td>
                             </tr>
                         {% else %}

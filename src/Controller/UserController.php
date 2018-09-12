@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AdminUserType;
 use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,6 +60,36 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', ['user' => $userRepository->findAll()]);
     }
 
+
+    /**
+     * @Route("/adminnew", name="admin_user_new", methods="GET|POST")
+     */
+    public function adminnew(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+
+        $user = new User();
+        $form = $this->createForm(AdminUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/new", name="user_new", methods="GET|POST")
      */
@@ -66,7 +97,7 @@ class UserController extends AbstractController
     {
 
         $user = new User();
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(AdminUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

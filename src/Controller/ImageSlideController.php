@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @Route("admin/image/slides")
+ * @Route("admin/images-du-slider")
  */
 class ImageSlideController extends Controller
 {
@@ -26,7 +26,7 @@ class ImageSlideController extends Controller
     }
 
     /**
-     * @Route("/new", name="image_slide_new", methods="GET|POST")
+     * @Route("/nouveau-slide", name="image_slide_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -63,7 +63,7 @@ $path = $rootdir. '/../public/slides';
     }
 
     /**
-     * @Route("/{id}", name="image_slide_show", methods="GET")
+     * @Route("/{alternative}", name="image_slide_show", methods="GET")
      */
     public function show(ImageSlide $imageSlide): Response
     {
@@ -71,7 +71,7 @@ $path = $rootdir. '/../public/slides';
     }
 
     /**
-     * @Route("/{id}/edit", name="image_slide_edit", methods="GET|POST")
+     * @Route("/modification/{alternative}", name="image_slide_edit", methods="GET|POST")
      */
     public function edit(Request $request, ImageSlide $imageSlide): Response
     {

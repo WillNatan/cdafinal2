@@ -21,7 +21,6 @@ class BackLivreOrType extends AbstractType
             ->add('date', DateType::class, array('widget' => 'single_text','label'=>"date d'envoi", 'attr'=>array('class'=>'form-control')))
             ->add('statut',ChoiceType::class, array('label'=>'Statut',
         'choices'  => array(
-            'Maybe' => null,
             'Activé' => true,
             'Desactivé' => false,
         ),'attr'=>array('style'=>'margin-top:15px;')))

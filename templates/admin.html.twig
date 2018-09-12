@@ -232,6 +232,37 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
+                        <i class="material-icons">face</i>
+                        <p> Utilisateurs
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+
+                    <div class="collapse" id="tablesExamples">
+                        <ul class="nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ path('user_index') }}">
+                                    <span class="sidebar-mini"> U </span>
+                                    <span class="sidebar-normal"> Utilisateurs </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ path('admin_user_new') }}">
+                                    <span class="sidebar-mini"> add </span>
+                                    <span class="sidebar-normal"> ajouter </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ path('logout') }}">
+                        <i class="material-icons">call_made</i>
+                        <p> Déconnexion </p>
+                    </a>
+                </li>
             </ul>
 
 
