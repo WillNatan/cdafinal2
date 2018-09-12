@@ -37,8 +37,7 @@
             .dashboard-bar{
                 background-color: #383838;
                 color: #f5f5f5;
-                position: fixed;
-                top: 0;
+                position: sticky;
                 width: 100%;
                 z-index: 250;
                 border-radius: 0;
@@ -53,16 +52,17 @@
     <body>
 
 
-   {% if app.user  %}
+    {% if app.user  %}
 
-      {% if app.user.roles[0] == "ROLE_ADMIN" %}
-          <div class="alert dashboard-bar" >
-              <span>Hello {{ app.user.username }} !</span>
-              <a href="{{ path('admin') }}">Cliquez ici </a> pour accéder au dashboard
+        {% if app.user.roles[0] == "ROLE_ADMIN" %}
+            <div class="alert dashboard-bar" >
+                <span>Hello {{ app.user.username }} !</span>
+                <a href="{{ path('admin') }}">Cliquez ici </a> pour accéder au dashboard
 
-          </div>
-      {%  endif %}
-   {% endif %}
+            </div>
+        {%  endif %}
+    {% endif %}
+
         <!-- HEADER section -->
         <header>
             <div id="box_logo" class="container height-100pc">

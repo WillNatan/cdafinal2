@@ -5,7 +5,15 @@
 		{{ messageError }}
 
 	{% endif %}
-<!-- CONTENT section -->	
+<!-- CONTENT section -->
+
+	<style>
+
+		#day-message {
+
+			z-index: 200;
+		}
+	</style>
 	<div id="content" class="container">
 	
 		<!-- Slide section -->
@@ -52,9 +60,14 @@
 			{% if message_Du_Jour %}
 			    <!-- Message du jour -->
 			<section id="box-day-message" class="row">
-				<img id="ruban_principal" src="images/ruban_message.png"/>
-				<img id="ruban_responsive" src="images/ruban2.png"/>
-				<div id="day-message"><h4 class="test">{{ message_Du_Jour[0].Message }}</h4></div>
+
+				<div id="ruban_css">
+					<div id="day-message">
+						<h4 class="test" style="word-wrap: break-word">{{ message_Du_Jour[0].Message }}</h4>
+
+					</div>
+				</div>
+
 			</section>
 			{% endif %}
 

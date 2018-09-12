@@ -12,7 +12,7 @@
 body {
 	/*background : #e2e2e2;*/
 	background-image : url(../images/background_body.png);
-	font-size : 14px;
+
 }
 
 .flexbox-column { /*pour center verticalement et horizontalement un contenu dans une div*/
@@ -202,9 +202,9 @@ header a:hover {
 #banniere_parallax {
 	background: url('../images/musiccountry.jpg') 30% 0 repeat-y fixed;
 	-webkit-background-size: cover;
-	background-size: cover;
+
 	background-position: center;
-	background-attachment: fixed !important;
+
 	background-size: cover !important;
 	height : 300px;
 }
@@ -223,34 +223,61 @@ header a:hover {
 	
 /* message du jour section */
 
-		#ruban_principal {
-			width: 600px;
-			position: absolute;
-			bottom: 60px;
-			right: -70.4px;
-			z-index: 100;
-		}
-		
-		#ruban_responsive {
-			width: 525px;
-			position: absolute;
-			bottom: 80px;
-			right: 0px;
-			z-index: 100;	
-		}
-		
-		#day-message{
-			width: 460px;
-			height: 81.52px;
-			position: absolute;
-			bottom: 75px;
-			right: 0px;
-			margin: 0px 10px 18px 0;
-			z-index : 200;
-		}
-		#day-message h2{
-			margin: 0px;			
-		}
+
+#ruban_css{
+	width: 50%;
+	height: auto;
+	background-color: white;
+
+	position : absolute;
+	top :65%;
+	right: 0;
+	float:right;
+
+	padding: 1rem;
+
+
+
+}
+
+
+#ruban_css::before{
+
+	position: absolute;
+	content: '';
+	width: 0;
+	height: 0;
+	right: 99%;
+	top: 0%;
+	border-top: 5rem solid white;
+	border-right: 5rem solid transparent;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(90deg);
+	z-index: 0;
+
+}
+
+#ruban_css::after{
+	position: absolute;
+	content: '';
+	width: 0;
+	height: 0;
+	right: 99%;
+	bottom: 0;
+	border-top: 5rem solid white;
+	border-left: 5rem solid transparent;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(90deg);
+	z-index: 0;
+
+}
+
 
 /* jumbotron accueil*/
 	
@@ -390,66 +417,78 @@ header a:hover {
 	opacity: 1;
 }
 
-/* MEDIA QUERIES */
-
-@media screen and (min-width:1290px){
-
-	#ruban_responsive {
-		display : none;	
-	}
-	
-}
-
 
 @media screen and (max-width:1290px) and (min-width:992px) {
 	
-	#ruban_principal {
-		display : none;	
-	}
-	
-	#ruban1{
-		right : 30px;
-	}
-	
-	#contenu_ruban1{
-		right : 50px;
-	}
-	
-	/*alerte message*/
-	#cadre_message {
-	position : absolute;
-	top : 8px;
-	right : 10px;
-	}
-	
-}
 
-@media screen and (max-width:991px) and (min-width:793px) {
-	
-	/*message du jour*/
-	#ruban_responsive {
-		display : none;	
+
+	#ruban_css{
+		width: 55%;
+		height: auto;
+		background-color: white;
+
+		position : absolute;
+		top :50%;
+		right: 0;
+		float:right;
+
+		padding: 1rem;
+
+
+
 	}
-	#ruban_principal {
-		width: 320px;
-		position: absolute;
-		bottom: 15px;
-		right: -37px;
-	}
-	#day-message{
-		width: 240px;
-		height: 65.78px;
-		position: absolute;
-		bottom: 0px;
-		right: 0px;
-	}
-	#day-message h2{
-		font-size : 1.4rem;
-	}
+
 
 }
+@media screen and (max-width:544px) {
 
-@media screen and (max-width:991px) { /*changement de design du header*/
+
+	#ruban_css{
+		width: 100%;
+		height: auto;
+		background-color: white;
+
+		position : absolute;
+		top :50%;
+		right: 0;
+		float:right;
+
+		padding: 1rem;
+
+
+
+	}
+	#ruban_css::before, #ruban_css::after{
+		display:none;
+
+	}
+
+
+}
+
+@media screen and (max-width:991px) and (min-width:768px) {
+	
+
+	#ruban_css{
+		width: 75%;
+		height: auto;
+		background-color: white;
+
+		position : absolute;
+		top :50%;
+		right: 0;
+		float:right;
+
+		padding: 1rem;
+
+	}
+
+
+
+
+}
+
+@media screen (min-width:768) and (max-width:991px) { /*changement de design du header*/
 
 	header {
 		height : 200px;
@@ -500,26 +539,26 @@ header a:hover {
 
 @media screen and (max-width:792px) { /*utiliser le ruban de message "responsive" à partir de là*/
 
-	#ruban_principal {
-		display : none;	
+
+
+	#ruban_css{
+		width: 100%;
+		height: auto;
+		background-color: white;
+
+		position : absolute;
+		top :50%;
+		right: 0;
+		float:right;
+
+		padding: 1rem;
+
+
+
 	}
-	
-	#ruban_responsive {
-		width: 320px;
-		position: absolute;
-		bottom: 15px;
-		right: 0px;	
-	}
-	#day-message{
-		width: 270px;
-		height: 60.78px;
-		position: absolute;
-		bottom: 0px;
-		right: 0px;
-	}
-	#day-message h2{
-		font-size : 1.4rem;
-	}
+
+
+
 
 }
 
@@ -594,7 +633,9 @@ header a:hover {
 		bottom: 15px;
 		right: 0px;
 	}
-	#day-message{
+	/*
+
+		#day-message{
 		width: 230px;
 		height: 48.44px;
 		bottom: 2px;
@@ -603,7 +644,37 @@ header a:hover {
 	#day-message h2{
 		font-size : 1.2rem;
 	}
-	
+	*/
+
+	#ruban_css{
+		width: 100%;
+		height: auto;
+		background-color: white;
+
+		position : absolute;
+		top :50%;
+		right: 0;
+		float:right;
+
+		padding: 1rem;
+
+
+
+	}
+
+
+	#ruban_css::before{
+
+		display:none;
+
+	}
+
+	#ruban_css::after{
+		display:none;
+
+	}
+
+
 }
 
 
@@ -689,4 +760,19 @@ header a:hover {
 		display : none;
 	}
 	
+}
+
+.wizard-container .card-title{
+	font-weight: 400;
+}
+
+.wizard-container .card-description{
+	font-size: 1.0625rem;
+	font-weight: 400;
+	color: #999;
+}
+
+
+.center-t{
+	text-align: center;
 }

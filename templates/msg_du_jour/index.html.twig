@@ -51,25 +51,64 @@
 
                     </table>
 
-                    <button class="btn btn-warning togglebutton" id="form_message_submit" onclick="show_form()">Créer un nouveau message</button>
-                    <script>
+                   {% if msg_du_jours is empty %}
 
-                       function show_form () {
+                       <input type="button" class="btn btn-warning togglebutton" id="form_message_submit" onclick="show_form()" value="Créer un nouveau message"/ >
 
-                            $('#form_messageNew').show(1000)
-                            $('#form_message_submit').hide();
-                        }
-                    </script>
 
-                    <div id="form_messageNew" style="display: none;">
-                        {% if form is defined %}
-                            <hr>
+                       <div id="form_messageNew" style="display: none;">
+                           {% if form is defined %}
+                               <hr>
 
-                            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                               <h4 class="mb-3">Entrer votre message du jour </h4>
 
-                            {{ include('msg_du_jour/_form.html.twig') }}
-                        {% endif %}
-                    </div>
+                               {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+                               {{ include('msg_du_jour/_form.html.twig') }}
+
+                               <span id="rchars">15</span> / 105
+
+                               <script>
+
+                           </script>
+                           {% endif %}
+                       </div>
+
+                       <script>
+
+                           function show_form () {
+
+                               $('#form_messageNew').toggle(500);
+
+                               if($('#form_message_submit').val() == "Créer un nouveau message"){
+                                   $('#form_message_submit').prop('value', 'Annuler');
+                                   $('#form_message_submit').removeClass('btn-warning').addClass('btn-danger');
+                               }
+                               else{
+                                   $('#form_message_submit').prop('value', 'Créer un nouveau message');
+                                   $('#form_message_submit').removeClass('btn-danger').addClass('btn-warning');
+
+                               }
+
+
+                           }
+                           jQuery(document).ready(function()  {
+                               console.log('lol')
+                               var maxLength = 105;
+
+                           $('#msg_du_jour_Message').click(function() {console.log('hello')});
+
+                           $(this).keyup(function() {
+                               var textlen = maxLength - $(this).val().length;
+                               console.log('helsssdsdafeflo');
+                               $('#rchars').text(textlen);
+                           });
+
+                           });
+
+                       </script>
+
+                    {% endif %}
 
                 </div>
 

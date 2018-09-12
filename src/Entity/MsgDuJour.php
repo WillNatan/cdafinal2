@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MsgDuJourRepository")
+ *
  */
 class MsgDuJour
 {
@@ -19,6 +21,7 @@ class MsgDuJour
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(max="105")
      */
     private $Message;
 

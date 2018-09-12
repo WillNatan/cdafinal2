@@ -34,13 +34,19 @@
             </div>
             
         <div id="banniere_parallax"></div>
-        
-            <!-- Message du jour -->
-        <section id="box-day-message" class="row">
-            <img id="ruban_principal" src="images/ruban_message.png"/>
-            <img id="ruban_responsive" src="images/ruban2.png"/>
-            <div id="day-message"><h2>La danse Country,<br/>Notre passion !</h2></div>
-        </section>
+            {% if message_Du_Jour %}
+                <!-- Message du jour -->
+                <section id="box-day-message" class="row">
+
+                    <div id="ruban_css">
+                        <div id="day-message">
+                            <h4 class="test" style="word-wrap: break-word">{{ message_Du_Jour[0].Message }}</h4>
+
+                        </div>
+                    </div>
+
+                </section>
+            {% endif %}
         
         </section>
         

@@ -75,9 +75,11 @@ class FrontController extends AbstractController
     /**
      * @Route("/telechargement", name="telechargement", methods="GET")
      */
-    public function telechargement(): Response
+    public function telechargement(MsgDuJourRepository $msgDuJourRepository): Response
     {
-        return $this->render('frontend/telechargement.html.twig');
+        return $this->render('frontend/telechargement.html.twig', [
+            'message_Du_Jour' => $msgDuJourRepository->findAll()
+        ]);
     }
 
     /**
@@ -140,7 +142,6 @@ class FrontController extends AbstractController
     public function espaceMembre( Request $request,UserPasswordEncoderInterface $passwordEncoder, LivreOrRepository $livreOrRepository): Response
     {
 
-
         $user = new User();
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
@@ -159,7 +160,7 @@ class FrontController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('membres_route');
+            return $this->redirectToRoute('membres_route', ['id' => $user->getId()]);
         }
 
         return $this->render('frontend/espace-membre.html.twig', [
@@ -169,11 +170,10 @@ class FrontController extends AbstractController
         ]);
 
 
-
-
     }
+
     /**
-     * @Route("/membres/{id}{", name="membres_edit", methods="GET|POST")
+     * @Route("/membres/{id}/edit", name="membres_edit", methods="GET|POST")
      */
     public function edit(Request $request, User $user): Response
     {
@@ -183,7 +183,7 @@ class FrontController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+            return $this->redirectToRoute('membres_edit', ['id' => $user->getId()]);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -191,5 +191,6 @@ class FrontController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 
 }
